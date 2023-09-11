@@ -10,6 +10,5 @@ if __name__ == "__main__":
     target = dataframe[" \"Final\""]
     print("Mean: ", target.mean())
     print("Median: ", target.median())
-    print("Standard Deviation: ", target.std())
     plt.scatter(dataframe["name"], dataframe[" \"Final\""])
     plt.savefig("result.png")
