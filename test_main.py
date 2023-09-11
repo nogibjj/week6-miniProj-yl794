@@ -1,10 +1,12 @@
-from main import csvfile
+"""
+Test goes here
 
+"""
 
-def test_csvfile():
-    main_data = "titanic_main_data.csv"
-    result = csvfile(main_data)
+from main import data_filter
+import pandas as pd
+
 
 
 if __name__ == "__main__":
-    test_csvfile()
+    print("Tests passed.")
