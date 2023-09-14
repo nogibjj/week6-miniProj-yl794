@@ -1,2 +1,2 @@
-# IDS706_Python_Template
-IDS 706 Mini-Project 1: Template for Python Projects
+# IDS706_Python_Week3
+IDS 706 Mini-Project3: Apply polar for statics

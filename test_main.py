@@ -2,7 +2,9 @@
 Test goes here
 
 """
-import pandas as pd
+import polars as pl
 
 if __name__ == "__main__":
-    print("Tests passed.")
+    data = pl.read_csv("test.csv")
+    assert data.height > 0
+    print("Input statisfy !")
