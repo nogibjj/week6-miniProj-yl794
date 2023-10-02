@@ -16,3 +16,4 @@ pandas
 matplotlib
 pandas_profiling
 polars
+sqlite3
