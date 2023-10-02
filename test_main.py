@@ -1,10 +1,8 @@
-"""
-Test goes here
-
-"""
-import polars as pl
+import sqlite3
 
 if __name__ == "__main__":
-    data = pl.read_csv("test.csv")
-    assert data.height > 0
-    print("Input statisfy !")
+    conn = sqlite3.connect('mydatabase.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT count(*) FROM users")
+    num = cursor.fetchall()
+    assert(num[0][0]==2)

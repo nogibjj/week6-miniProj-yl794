@@ -19,6 +19,7 @@ def Delete(cursor):
 def Read(cursor):
     cursor.execute("SELECT username FROM users")
     users = cursor.fetchall()
+    return users
     
 if __name__ == "__main__":
     conn = sqlite3.connect("mydatabase.db")
