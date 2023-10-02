@@ -1,22 +1,35 @@
-'''
-main function here
-'''
-import polars as pl
-import matplotlib.pyplot as plt
+import sqlite3
 
-def plot_polar(data):
-    plt.hist(data[::,1].to_numpy(), edgecolor="b")
-    plt.title("Statics of students' grades")
-    plt.xlabel("Grade")
-    plt.ylabel("Num")
-    plt.savefig("RESULT.png")
+def Create(cursor):
+    # Create a table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY,
+            username TEXT NOT NULL
+        )
+    """)
 
+def Update(cursor):
+    cursor.execute("INSERT INTO users (username) VALUES ('Lucy')")
+    cursor.execute("INSERT INTO users (username) VALUES ('Alice')")
 
+def Delete(cursor):
+    cursor.execute("DELETE from users where username = 'Lucy'")
+
+def Read(cursor):
+    cursor.execute("SELECT username FROM users")
+    users = cursor.fetchall()
+    
 if __name__ == "__main__":
-    df = pl.read_csv("test.csv")
-    stats = {
-        "mean": df[::,1].mean(),
-        "std": df[::,1].std()
-    }
-    res = {"grades" :stats}
-    plot_polar(df)
+    conn = sqlite3.connect("mydatabase.db")
+    cursor = conn.cursor()
+    Create(cursor)
+    Update(cursor)
+    Delete(cursor)
+    conn.commit()
+    users = Read(cursor)
+    for user in users:
+        print(user)
+    
+    # Close the connection
+    conn.close()
