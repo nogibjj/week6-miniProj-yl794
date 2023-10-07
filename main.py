@@ -1,36 +1,15 @@
 import sqlite3
-
-def Create(cursor):
-    # Create a table
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY,
-            username TEXT NOT NULL
-        )
-    """)
-
-def Update(cursor):
-    cursor.execute("INSERT INTO users (username) VALUES ('Lucy')")
-    cursor.execute("INSERT INTO users (username) VALUES ('Alice')")
-
-def Delete(cursor):
-    cursor.execute("DELETE from users where username = 'Lucy'")
-
-def Read(cursor):
-    cursor.execute("SELECT username FROM users")
-    users = cursor.fetchall()
-    return users
     
 if __name__ == "__main__":
-    conn = sqlite3.connect("mydatabase.db")
+    conn = sqlite3.connect("Chinook.sqlite")
     cursor = conn.cursor()
-    Create(cursor)
-    Update(cursor)
-    Delete(cursor)
+    with open("query.sql", 'r', encoding="utf-8") as f:
+        sql_content = f.read()
+    cursor.execute(sql_content)
+    results = cursor.fetchall()
     conn.commit()
-    users = Read(cursor)
-    for user in users:
-        print(user)
+    for row in results:
+        print(row)
     
     # Close the connection
     conn.close()
